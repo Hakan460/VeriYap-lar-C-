@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    int data;
+    struct node *next;
+};
+
+struct node *bas = NULL;
+struct node *temp = NULL;
+
+void sonaEkle(int sayi) {
+    struct node * eleman;
+    eleman = (struct node *) malloc(sizeof(struct node));
+    eleman->data = sayi;
+    eleman->next = NULL;
+
+    if (bas == NULL) {
+        bas = eleman;
+    } else {
+        temp = bas;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = eleman;
+    }
+}
+
+void yazdir() {
+    temp = bas;
+    while (temp->next != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+    printf("%d ", temp->data);
+}
+
+int main() {
+    int adet = 0;
+    while (adet != 5) {
+        int sayi;
+        printf("Bir sayi giriniz: ");
+        scanf("%d", &sayi);
+        sonaEkle(sayi);
+        adet++;
+    }
+    yazdir();
+    return 0;
+}
